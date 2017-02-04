@@ -10,12 +10,12 @@ public class DataModel {
         this.id_ = id_;
     }
 
-    public Sting getName()
+    public String getName()
     {
         return name;
     }
 
-    publi int getId()
+    public int getId()
     {
         return id_;
     }
