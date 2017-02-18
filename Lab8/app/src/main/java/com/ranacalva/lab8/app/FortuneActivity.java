@@ -53,7 +53,7 @@ public class FortuneActivity extends AppCompatActivity {
         final TextView fortuneTxt = (TextView)findViewById(R.id.fortune);
         fortuneTxt.setText("Loading...");
         //create an instance of the request
-        JsonObjectRequest request = new JsonObjectRequest(com.android.volley.Request.Method.GET, "http://quotes.rest/qod.json", (String) null,
+        JsonObjectRequest request = new JsonObjectRequest(com.android.volley.Request.Method.GET, "http://services.groupkt.com/country/get/all", (String) null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -61,9 +61,9 @@ public class FortuneActivity extends AppCompatActivity {
                         String fortune;
                         //parse the quote
                         try {
-                            JSONObject contents = response.getJSONObject("contents");
-                            JSONArray quotes = contents.getJSONArray("quotes");
-                            fortune = quotes.getJSONObject(0).getString("quote");
+                            JSONArray quotes = response.getJSONObject("RestResponse").getJSONArray("result");
+                            fortune = quotes.getJSONObject(0).getString("name");
+                            //fortune = quotes.getJSONObject(0).getString("name");
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
